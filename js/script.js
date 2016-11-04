@@ -1,24 +1,25 @@
-/*#########################################
-\                                         \
-\              Variables                  \
-\                                         \
-#########################################*/
+//default map
+$(document).ready(function(){
+    loading();
+    $(".us-nav-uspres").click(uspresFunction);
+    uspresFunction();   
+    //setNav();
+});
+
+//declaring variables
+
+
 var mapWidth = $(".my-map").width(),
     mapHeight = $(".my-map").height();
 
 var width = 960,
     height = 500;
 
-// var svg = d3.select(".my-map")
-//             .append("svg")
-//             .attr("width", width)
-//     		    .attr("height", height);
-
 // albers projection
 var projection = d3.geo.albers()
 // .center - first number is basic up = left, down, = right, second number is up is down, down is up. 
     .center([1.2, 38.7])
-    // lat long - geogrpahic center of missouri - 
+    // lat long - geographic center of missouri - 
     .rotate([91.5, .3, .75])
     .parallels([29.5, 25])
     .scale(5500)
@@ -26,19 +27,28 @@ var projection = d3.geo.albers()
 
 var path = d3.geo.path()
     .projection(projection);
-
-var currView = "audit";       
-
+            
 var join = {}; 
 var test = {};
-var mosenate = {};
-var mohouse = {};
-var ushouse = {};
-var ca2 = {};
-var ca3 = {};
-var ca6 = {};
-var ca10 = {};
-var audit = {};
+
+$(".us-nav-uspres").click(uspresFunction);
+$(".us-nav-ushouse").click(ushouseFunction);
+$(".us-nav-ussenate").click(ussenateFunction);
+$(".state-nav-mogov").click(mogovFunction);
+$(".state-nav-moltgov").click(moltgovFunction);
+$(".state-nav-mosos").click(mososFunction);
+$(".state-nav-motre").click(motreFunction);
+$(".state-nav-moag").click(moagFunction);
+$(".state-nav-mohouse").click(mohouseFunction);
+$(".state-nav-mosenate").click(mosenateFunction);
+$(".ball-nav-ball1").click(ball1Function);
+$(".ball-nav-ball2").click(ball2Function);
+$(".ball-nav-ball3").click(ball3Function);
+$(".ball-nav-ball4").click(ball4Function);
+$(".ball-nav-ball6").click(ball6Function);
+$(".ball-nav-balla").click(ballaFunction);
+
+
 
 var mapSvg = d3.select(".my-map").append("svg")
     .attr("class", "mapSvg")
@@ -52,21 +62,11 @@ mapSvg.append("rect")
 
 var mapGroup = mapSvg.append("g");
 
-/*#########################################
-\                                         \
-\              FUNCTIONS                  \
-\                                         \
-#########################################*/
 
-(function($){
+//writing functions
 
-    $(document).ready(function() {
-      loading();
-      makeData.init();   
-      setNav();    
-    }); 
 
-    function loading() {
+function loading() {
 
     var lw = $(".loading").width();
     var lh = $(".loading").height();
@@ -76,26 +76,112 @@ var mapGroup = mapSvg.append("g");
         "top" : (mapHeight/2) - (lh/2)+"px",
         "display" : "block"
     });
-}
+    
+function uspresFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/federal")
+    .await(theMap.drawMap);
+    .await(setData);
+}; 
+function ushouseFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/us_representative")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function ussenateFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/federal")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function mogovFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function moltgovFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function mososFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function motreFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function moagFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function mohouseFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/state_house")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+/**
+function mosenateFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/state_senate")
+    .await(theMap.drawMap);
+    .await(setData);
+};**/
+function ball1Function(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function ball2Function(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function ball3Function(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function ball4Function(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function ball6Function(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
+    .await(theMap.drawMap);
+    .await(setData);
+};
+function ballaFunction(){
+    queue()
+    .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
+    .await(theMap.drawMap);
+    .await(setData);
+};
 
-// BUILD MAP FUNCTIONS
-
-var makeData = {
-
-      init: function (){
-      queue()
-          // .defer(d3.json, "data/data_2.json")
-          // .defer(d3.json, "data/election_data.json")
-          .defer(d3.json, "data/election_data.json")
-          .await(setData);
-          // .await(lastupdate);
-    }
-  }//close makeData
 
 // set up variable for the info box that will appear on rollover
+
+
 infoBoxUpdates = {
 
-  audit: function(d){
+  uspres: function(d){
 
     // calls to div with ID  of infobox via jquery
     var infoBox = $('#infobox'),
@@ -104,30 +190,24 @@ infoBoxUpdates = {
            // pulls the data from the currview dataset
            data = mapData[currView];
            
-           if (currView === "audit"){
-           // drills into the object that holds the results
-        var results = data.county_results[fips];
-        var percent = ((data.county_results[fips].reporting_precincts /  data.county_results[fips].total_precincts)*100).toFixed(2);
+    if (currView === "uspres"){
+    // drills into the object that holds the results
+    var results = data.county_results[fips];
+    var percent = ((data.county_results[fips].reporting_precincts /  data.county_results[fips].total_precincts)*100).toFixed(2);
 console.log(percent)
-      var votecount = 0;
-      var statewide = [];
-      var bulletgroup = []
-      for (var candidateId in data.candidates){
+    var votecount = 0;
+    var statewide = [];
+    var bulletgroup = []
+    for (var candidateId in data.candidates){
       var candidate = data.candidates[candidateId];
-         votecount += results.candidates[candidateId].yes_votes;
-         statewide.push(candidate.yes_votes);}
-         // console.log(statewide)
-      
-      //    for (var candidateId in data.candidates){
-      // var candidate = data.candidates[candidateId];
-      //    votecount += results.candidates[candidateId].yes_votes;}
-    // console.log(votecount)
-
-        // preps the message:  sets the county text to a headline (and starts an unordered list)
+      votecount += results.candidates[candidateId].yes_votes;
+      statewide.push(candidate.yes_votes);}
+        
         message = "<h4 class = 'ibhed'>County :</h4>"+ "<br/><h3 class = 'cty'>" + results.county + "</h3><ul>";
 
 // LOOP IN VAR MESSAGE
 // loops through the candID in the data.candidates
+        
 for (var candidateId in data.candidates){
   // sets the results of the loop to "candidate" i.e. the values in the object (which is the IDs)
      var candidate = data.candidates[candidateId];
@@ -140,20 +220,20 @@ for (var candidateId in data.candidates){
           // and the results from the "yes" votes and then closes the list item.
           results.candidates[candidateId].yes_votes + "  <b>(" +(~~(results.candidates[candidateId].yes_votes/votecount*100).toFixed(2)) +"%)</b></li>";
           
+
 }//CLOSE LOOP IN VAR MESSAGE
 // bulletgroup.push(bullet);
 // uses entirety of var message from line 112-124 and adds an unordered list closing tag after the loops goes through all the data and breaks.
 
+
   message += "<br><b>(Precincts reporting: " +(~~percent) +"%)</b></ul><h3 class ='lowhead'><br>Statewide Totals:</h3><br> <ul id = 'audittotal'><li>" + bulletgroup[0] + " " +statewide[0] + "  " + "<b>("+(~~(statewide[0]/(statewide[0]+statewide[1]+statewide[2])*100).toFixed(2))+"%)</b>"+ "</li><li>" + bulletgroup[1] + " " + statewide[1] + "  " + "<b>("+(~~(statewide[1]/(statewide[0]+statewide[1]+statewide[2])*100).toFixed(2))+"%)</b>"+ "</li><li>" + bulletgroup[2] + " " +statewide[2]+ "  " + "<b>("+(~~(statewide[2]/(statewide[0]+statewide[1]+statewide[2])*100).toFixed(2))+"%)</b>"+"</li></ul>";
 
-// '<i class="fa fa-square Constitution' '<i class='fa fa-square Libertarian'" '<i class="fa fa-square Republican'
 
-//  this line simply applies the "message" to go in the infobox - jquery is "x.html(varname)"
   infoBox.html(message);
 
-   //close function: audit
-
-} else  if (currView === "ca2"){ 
+} 
+      
+      else  if (currView === "ca2"){ 
 
         var results = data.county_results[fips];
         var percent = ((data.county_results[fips].reporting_precincts /  data.county_results[fips].total_precincts)*100).toFixed(2);
@@ -226,6 +306,7 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
       var candidate = data.candidates[candidateId]}
          var votecount = results.candidates[candidateId].yes_votes + results.candidates[candidateId].no_votes ;
 
+
         message2 = "<h4 class = 'ibhed'>County :</h4>"+ "<br/><h3 class = 'cty'>" + results.county + "</h3><ul>";
           for (var candidateId in data.candidates){
             var candidate = data.candidates[candidateId];
@@ -252,6 +333,7 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
       var candidate = results.candidates[candidateId];
          votecount += results.candidates[candidateId].yes_votes ;}
          // console.log(votecount);
+
 
              // console.log(results)
         message2 = "<h3 class = 'ibhed'>" + [fips] + "</h3><ul>";
@@ -289,6 +371,7 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
             message2 += "<li>" + bullet + " " + candidate.candidate_name + '<br/>'+ '( ' + candidate.party + ') ' + '<br/>'+ "Votes : " + results.candidates[candidateId].yes_votes + "  <b>(" +(~~(results.candidates[candidateId].yes_votes/votecount*100).toFixed(2)) +"%)</b>" +'<br/>'+"</li>"
         }//CLOSE LOOP IN VAR MESSAGE
 
+
   message2 += "<br><b>(Precincts reporting: " +(~~percent) +"%)</b></ul>";
 
 // polyfill:
@@ -301,6 +384,7 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
 // }
   // Object.keys(mapData[currView]['District 44'].candidates).length
 
+
 //  this line simply applies the "message" to go in the infobox - jquery is "x.html(varname)"
 
   infoBox.html(message2);}
@@ -311,6 +395,7 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
                     fips = fips_replace.replace(/_/,' ');
              var results = data[fips];
                           var percent = (results.pct_precincts_reported*100).toFixed(2);
+
 
                  var votecount = 0;
       for (var candidateId in results.candidates){
@@ -332,18 +417,27 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
 
   }
 
+
 },//close function :audit
 
-     clear: function(d){
+    clear: function(d){
     var infoBox = $('#infobox');
     var clearmessage = " ";
     infoBox.html(clearmessage);
   },
 
+
+
 };  //close updateinfobox
+
+
+
+
+
 
 // collection of functions to color districts - lookup for the set of data per data set
 update = {
+
 
    audit: function (data){
       for (var fips in data.county_results) {
@@ -360,6 +454,7 @@ update = {
   el.attr('class', 'county _' + max.candidate);
 
       } //close outer for loop
+
 
   }, // close audit function
 
@@ -389,6 +484,8 @@ update = {
       } //end for loop
 
     }, //end ca2 function
+
+
 
     ca3: function (data){
 
@@ -478,8 +575,10 @@ ca10: function (data){
         var dist_replace = dist.replace(/ /,'_');
         var distInfo = data[dist],
  
+
                   el = d3.select('path#'+'MH'+dist_replace);
                   
+
                       var max = {candidate: "", votes: 0, party: ""};
                        for (candidateId in distInfo.candidates){
                             if (distInfo.candidates[candidateId].yes_votes > max.votes) {
@@ -491,6 +590,7 @@ ca10: function (data){
 
       } //close outer for loop
 
+
   }, // close mohouse function
 
 mosenate: function (data){
@@ -499,6 +599,7 @@ mosenate: function (data){
         // strip out the space and replace with an underscore so it's a valid css selector
         var dist_replace = dist.replace(/ /,'_');
         var distInfo = data[dist];
+
 
                   var el = d3.select('path#'+'MS'+dist_replace);
 
@@ -513,7 +614,9 @@ mosenate: function (data){
 
       } //close outer for loop
 
+
   }, // close mosenate function
+
 
   ushouse: function (data){
  
@@ -521,6 +624,7 @@ mosenate: function (data){
         // strip out the space and replace with an underscore so it's a valid css selector
         var dist_replace = dist.replace(/ /,'_');
         var distInfo = data[dist];
+
 
                   var el = d3.select('path#'+'US'+dist_replace);
 
@@ -535,14 +639,17 @@ mosenate: function (data){
 
       } //close outer for loop
 
+
   } // close ushouse function
 
   }; // end update
+
 
 // var for 
 mapData = {};
 function setData (error, feed_data) {
 theMap.init();
+  
 
 test = feed_data;
 
@@ -552,18 +659,40 @@ var lu = " <i>Last Updated: " + test.last_updated + "</i>";
 timeBox.html(lu);
   // time.html(lu)
 
+//mapData = {
+  //mosenate: test.races['State Senate'],
+  //mohouse: test.races['State House'],
+  //ushouse: test.races['US Representative'],
+  //ca2: test.races['Ballot Issues']['Constitutional Amendment 2'],
+  //ca3: test.races['Ballot Issues']['Constitutional Amendment 3'],
+  //ca6: test.races['Ballot Issues']['Constitutional Amendment 6'],
+  //ca10: test.races['Ballot Issues']['Constitutional Amendment 10'],
+  //audit: test.races['State of Missouri']['State Auditor'],
+//};
+    
 mapData = {
-  mosenate: test.races['State Senate'],
-  mohouse: test.races['State House'],
-  ushouse: test.races['US Representative'],
-  ca2: test.races['Ballot Issues']['Constitutional Amendment 2'],
-  ca3: test.races['Ballot Issues']['Constitutional Amendment 3'],
-  ca6: test.races['Ballot Issues']['Constitutional Amendment 6'],
-  ca10: test.races['Ballot Issues']['Constitutional Amendment 10'],
-  audit: test.races['State of Missouri']['State Auditor'],
+    uspres: test.races['US Races']['Presidential'],
+    ushouse: test.races['US Races']['US House'],
+    ussenate: test.races['US Races']['US Senate'],
+    mogov: test.races['State Races']['Governor'],
+    moltgov: test.races['State Races']['Lt. Governor'],
+    mosos: test.races['State Races']['Secretary of State'],
+    motre: test.races['State Races']['Treasurer'],
+    moag: test.races['State Races']['Attorney General'],
+    mohouse: test.races['State Races']['MO House'],
+    mosenate: test.races['State Races']['MO Senate'],
+    ball1: test.races['Ballot Issues']['Amendment 1'],
+    ball2: test.races['Ballot Issues']['Amendment 2'],
+    ball3: test.races['Ballot Issues']['Amendment 3'],
+    ball4: test.races['Ballot Issues']['Amendment 4'],
+    ball6: test.races['Ballot Issues']['Amendment 6'],
+    balla: test.races['Ballot Issues']['Proposition A'],
 };
 
 }; //close setData
+
+
+
 
 var theMap = {
 
@@ -577,21 +706,17 @@ var theMap = {
           .defer(d3.json, "data/mo_topo_senate.json")
 .await(theMap.drawMap);
 
-}, //close theMap.init
-
+}
 drawMap: function (error, mo_county, mo_house, us_congress, mo_senate) {
-
-console.log(mo_county);
-// console.log(mo_house);
-// console.log(mo_senate);
-// console.log(us_congress);
-
+    
 // STATEWIDE
 
 var mapCounty =  mapGroup.append("g")
     .attr("class", "group county");
 
+
 var counties = topojson.feature(mo_county, mo_county.objects.mo_county_slice);
+
 
 mapCounty.append("path")
     .datum(counties)
@@ -606,10 +731,15 @@ mapCounty.selectAll(".county")
     .on("mouseover",infoBoxUpdates[currView])
     .on("mouseout",infoBoxUpdates.clear);
 
+
+
 mapCounty.append("path")
     .datum(topojson.mesh(mo_county, mo_county.objects.mo_county_slice, function(a, b) { return a !== b}))
     .attr("d", path)
     .attr("class", "county-edges");
+
+
+
 
 // HOUSE DISTRICTS
 
@@ -636,6 +766,8 @@ mapHouse.append("path")
     .attr("d", path)
     .attr("class", "mohouse-edges");
 
+
+
 //MO SENATE
 
 var mapSenate =  mapGroup.append("g")
@@ -643,12 +775,13 @@ var mapSenate =  mapGroup.append("g")
 
 var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
 
+
 mapSenate.append("path")
     .datum(senate)
     .attr("d", path);
 
 mapSenate.selectAll(".mosenate")
-    .data(topojson.feature(mo_senate, mo_senate.objects.mo_senate).features)
+    .data(topojson.feature(mo_senate, namedFunctionmo_senate.objects.mo_senate).features)
     .enter().append("path")
     // strips out the "state senate" from the ID to match the data feed
     .attr('id', function(d){var x = d.properties.NAMELSAD; var x = x.replace('State Senate ', ''); return 'MS'+x.replace(/ /,'_');})
@@ -666,7 +799,9 @@ mapSenate.append("path")
 var mapCongress =  mapGroup.append("g")
     .attr("class", "group ushouse");
 
+
 var uscongress = topojson.feature(us_congress, us_congress.objects.mo_congress);
+
 
 mapCongress.append("path")
     .datum(uscongress)
@@ -694,9 +829,18 @@ update[currView](mapData[currView]);
 
 } //close theMap.drawMap
 
+
+
+
+
+
+
+
+
 } //close theMap
 
 })(jQuery);
+
 
 // Buttons! change view-state to active on click 
 //########################################
@@ -704,21 +848,15 @@ update[currView](mapData[currView]);
 //########################################
 
 function setNav () {
-    //ORIGINAL JQUERY//
-    //$(".btn.view-state").on("click", function() {
-        //currView = $(this).attr("val");
-    //infoBoxUpdates[currView];
-   //$('ul.nav li.dropdown').hover(function() {
 
-    //NEW JQUERY FROM CODEPEN//
-    $('ul.nav li.dropdown').hover(function() {
-  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-}, function() {
-  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-//});
+
+    $(".btn.view-state").on("click", function() {
+        currView = $(this).attr("val");
+    infoBoxUpdates[currView];
 
     $(".btn.view-state").removeClass("active");
     $(this).addClass("active");
+
 
     if (currView === "audit" || currView === "ca2" || currView === "ca3" || currView === "ca6"|| currView === "ca10") {
     update[currView](mapData[currView]);
@@ -745,3 +883,4 @@ function setNav () {
 });
 
 };
+
