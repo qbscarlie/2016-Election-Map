@@ -1,0 +1,2 @@
+This is a map for the Missouri state election coded by Carlie Procell and Daniel Levitt.
+Original link - http://www.columbiamissourian.com/news/interactive-map-missouri-general-election-results/article_b9eede11-1256-5d88-9830-157f801ed7ac.html
