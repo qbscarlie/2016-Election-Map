@@ -37,6 +37,20 @@
                 </div>
             </header>
             <br>
+
+            <!--<section class="row">
+                <div class='col-md-12'>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-default view-state active" val='audit
+ult view-state" val='ca2'>Amendment 2</button>
+            <button type="button" class="btn btn-sm btn-default view-state" val='ca3'>Amendment 3</button>
+            <button type="button" class="btn btn-sm btn-default view-state" val='ca6'>Amendment 6</button>
+            <button type="button" class="btn btn-sm btn-default view-state" val='ca10'>Amendment 10</button>
+            <button type="button" class="btn btn-sm btn-default view-state" val='mohouse'>Missouri House</button>
+            <button type="button" class="btn btn-sm btn-default view-state" val='mosenate'>Missouri Senate</button>
+            <button type="button" class="btn btn-sm btn-default view-state" val='ushouse'>US Representative</button>
+          </div>
+        </div>-->
             
         <section class="row">
             <div class='col-md-12'>
@@ -48,9 +62,9 @@
                 <li><div class="dropdown">
                     <button class="btn tn-primary dropdown-toggle" type="button" data-toggle="dropdown" val='US'>U.S. Races <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                <li><a class="view-state-activate uspres" val='uspres'>Presidential</a></li>
-                <li><a class="view-state-activate ushouse" val='ushouse'>Senate</a></li>
-                <li><a class="view-state-activate ussenate" val='ussenate'>House</a></li>
+                <li><a class="view-state-activate view-state-uspres">President</a></li>
+                <li><a class="view-state-activate view-state-ushouse">U.S. Senate</a></li>
+                <li><a class="view-state-activate view-state-ussenate">U.S. House</a></li>
                     
                 </ul>
                 </div></li>
@@ -59,24 +73,25 @@
                 <ul class="dropdown-menu">
 
                 <!--CLASS FOR PADDING AROUND RACES IN DROPDOWN-->
-                    <li><a class="view-state-activate mogov" val='mogov'>Governor</a></li>
-                    <li><a class="view-state-activate moltgov" val='moltgov'>Lt. Governor</a></li>
-                    <li><a class="view-state-activate mosos" val='mosos'>Secretary of Senate</a></li>
-                    <li><a class="view-state-activate motre" val='motre'>Treasurer</a></li>
-                    <li><a class="view-state-activate moag" val='moag'>Attorney General</a></li>
-                    <li><a class="view-state-activate mohouse" val='mohouse'>House</a></li>
-                    <li><a class="view-state-activate mosenate" val='mosenate'>Senate</a></li>
+                <!--button type="button" class="btn btn-sm btn-default view-state" val='mogov'</button>-->
+                    <li><a class="view-state-activate view-state-mogov">Governor</a></li>
+                    <li><a class="view-state-activate view-state-mosos">Secretary of State</a></li>
+                    <li><a class="view-state-activate view-state-moag">Attorney General</a></li>
+                    <li><a class="view-state-activate view-state-moltgov">Lt. Governor</a></li>
+                    <li><a class="view-state-activate view-state-motre">Treasurer</a></li>
+                    <li><a class="view-state-activate view-state-mohouse">House</a></li>
+                    <li><a class="view-state-activate view-state-mosenate">Senate</a></li>
                 </ul>
                 </div></li>
                 <li><div class="dropdown">
                     <button class="btn tn-primary dropdown-toggle" type="button" data-toggle="dropdown" val='Ballot'>Ballot Issues <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a class="view-state-activate ball1" val='ball1'>Amendment 1</a></li>
-                    <li><a class="view-state-activate ball2" val='ball2'>Amendment 2</a></li>
-                    <li><a class="view-state-activate ball3" val='ball3'>Amendment 3</a></li>
-                    <li><a class="view-state-activate ball4" val='ball4'>Amendment 4</a></li>
-                    <li><a class="view-state-activate ball6" val='ball6'>Amendment 6</a></li>
-                    <li><a class="view-state-activate balla" val='balla'>Proposition A</a></li>
+                    <li><a class="view-state-activate view-state-ball1">Amendment 1</a></li>
+                    <li><a class="view-state-activate view-state-ball2">Amendment 2</a></li>
+                    <li><a class="view-state-activate view-state-ball3">Amendment 3</a></li>
+                    <li><a class="view-state-activate view-state-ball4">Amendment 4</a></li>
+                    <li><a class="view-state-activate view-state-ball3">Amendment 6</a></li>
+                    <li><a class="view-state-activate view-state-ball4">Proposition A</a></li>
                 </ul>
                 </div></li></ul>
                 </nav>
@@ -86,7 +101,7 @@
             <div class="col-md-12 my-map">
                 <img class='loading' src='img/loading.gif'>
             </div>
-            <div id = "infobox" class = "well">
+            <div id = "infobox">
                 
             </div>
             <div id = "time"> 

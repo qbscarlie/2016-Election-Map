@@ -664,9 +664,7 @@ function drawmosenatemap(){
     d3.json("data/mo_topo_senate.json", function(collection) {
     };
 };
-    
-    
-    
+      
     
 var timeBox = $('#time');
 var lu = " <i>Last Updated: " + test.last_updated + "</i>";
@@ -718,8 +716,6 @@ mapCounty.append("path")
     .attr("class", "county-edges");
 
 
-
-
 // HOUSE DISTRICTS
 
 var mapHouse =  mapGroup.append("g")
@@ -740,9 +736,7 @@ mapHouse.append("path")
     .datum(topojson.mesh(mo_house, mo_house.objects.mo_house, function(a, b) { return a !== b; }))
     .attr("d", path)
     .attr("class", "mohouse-edges");
-
-
-    
+  
 //MO SENATE
 
 var mapSenate =  mapGroup.append("g")
@@ -803,13 +797,6 @@ update[currView](mapData[currView]);
     infoBoxUpdates[currView];
 
 } //close theMap.drawMap
-
-
-
-
-
-
-
 
 
 } //close theMap

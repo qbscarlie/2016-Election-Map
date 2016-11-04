@@ -16,7 +16,7 @@
 }
 
 .group.county {
-	fill: #fff;
+  fill: #fff;
   transition: fill 0.2s ease;
 }
 
@@ -37,14 +37,14 @@
 }*/
 
 .group.ushouse {
-	fill: #fff;
-  	transition: fill 0.2s ease;
+  fill: #fff;
+    transition: fill 0.2s ease;
 
 }
 
 /*hover sets to red*/
 /*.ushouse:hover {
-	fill: #D0D1D6;
+  fill: #D0D1D6;
   opacity: .5;
 }*/
 
@@ -83,13 +83,13 @@
 }
 
 .group.mohouse {
-	fill: #fff;
-  	transition: fill 0.2s ease;
+  fill: #fff;
+    transition: fill 0.2s ease;
 }
 
 /*hover sets to red*/
 /*.mohouse :hover {
-	fill: #D0D1D6;
+  fill: #D0D1D6;
   transition: fill 0.2s ease;
 }*/
 
@@ -135,10 +135,10 @@ li {
 }
 
 .btn {
-margin-left: 40px;
-	margin-top: 0px;
+margin-left: 10px;
+  margin-top: 0px;
   background-color: white;
-	/*float: right;*/
+  /*float: right;*/
 }
 
 .cty {
@@ -208,12 +208,12 @@ margin-top: -20px;
 }
 
 #infobox {
-  height: 450px;
+  height: 45px;
   width: 250px;
-  /*background-color: red;*/
+  background-color: white;
   position: absolute;
-  top: 30px;
-  right: 80px;
+  top: 0px;
+  right: 10px;
 
   z-index: -1;
 }
@@ -223,8 +223,23 @@ margin-top: -20px;
   width:250px;
   /*background-color: red;*/
   position: absolute;
-  right: 72px;
-  bottom: -20px;
+  right: 10px;
+  bottom: 20px;
+}
+
+.h4 {
+
+  /*For county headers*/
+}
+
+.h3 {
+
+  /*Results*/
+}
+
+.dropdown:hover .dropdown-menu {
+
+  display: block;
 }
 
 /*candidate color values: SVG */
