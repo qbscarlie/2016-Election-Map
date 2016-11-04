@@ -3,7 +3,7 @@ $(document).ready(function(){
     loading();
     $(".us-nav-uspres").click(uspresFunction);
     uspresFunction();   
-    //setNav();
+    setNav();
 });
 
 //declaring variables
@@ -30,6 +30,8 @@ var path = d3.geo.path()
             
 var join = {}; 
 var test = {};
+var mapData = {};
+var currView = "uspres";
 
 $(".uspres").click(uspresFunction);
 $(".ushouse").click(ushouseFunction);
@@ -76,103 +78,150 @@ function loading() {
         "top" : (mapHeight/2) - (lh/2)+"px",
         "display" : "block"
     });
+
+function setData (error, feed_data){
+    test=feed_data;
+    var timeBox=$('#time');
+    var lu = "Last updated: "+test.last_updated;
+    timeBox.html(lu);
+    
+    mapData = {
+    uspres: test.races['US Races']['Presidential'],
+    ushouse: test.races['US Races']['US House'],
+    ussenate: test.races['US Races']['US Senate'],
+    mogov: test.races['State Races']['Governor'],
+    moltgov: test.races['State Races']['Lt. Governor'],
+    mosos: test.races['State Races']['Secretary of State'],
+    motre: test.races['State Races']['Treasurer'],
+    moag: test.races['State Races']['Attorney General'],
+    mohouse: test.races['State Races']['MO House'],
+    mosenate: test.races['State Races']['MO Senate'],
+    ball1: test.races['Ballot Issues']['Amendment 1'],
+    ball2: test.races['Ballot Issues']['Amendment 2'],
+    ball3: test.races['Ballot Issues']['Amendment 3'],
+    ball4: test.races['Ballot Issues']['Amendment 4'],
+    ball6: test.races['Ballot Issues']['Amendment 6'],
+    balla: test.races['Ballot Issues']['Proposition A'],
+    };
+};
+
+function setNav () {
+    $(".btn.view-state").on("click", function() {
+        currView = $(this).attr("val");
+    infoBoxUpdates[currView];
+    $(".btn.view-state").removeClass("active");
+    $(this).addClass("active");
+    if (currView === "uspres" || currView === "ussenate" || currView === "mogov" || currView === "moltgov"|| currView === "mosos" || currView === "motre" || currView === "moag" || currView === "ball1" || currView === "ball2" || currView === "ball3" || currView === "ball4" || currView === "ball6" || currView === "balla") {
+    update[currView](mapData[currView]);
+    d3.selectAll(".mohouse, .mosenate, .ushouse")
+    .style("visibility", "hidden");
+    d3.selectAll(".county").style("visibility", "visible");
+    } 
+        
+    else if (currView === "mohouse" || currView === "ushouse") {
+    update[currView](mapData[currView]);
+    d3.selectAll(".ushouse, .mosenate, .county")
+    .style("visibility", "hidden");
+    d3.selectAll(".mohouse").style("visibility", "visible");
+    } 
+        
+    else if (currView === "mosenate") {
+    update[currView](mapData[currView]);
+    d3.selectAll(".mohouse, .ushouse, .county")
+    .style("visibility", "hidden");
+    d3.selectAll(".mosenate").style("visibility", "visible");
+    } 
+    
+    else if (currView === "ushouse") {
+    update[currView](mapData[currView]);
+    d3.selectAll(".mohouse, .mosenate, .county")
+    .style("visibility", "hidden");
+    d3.selectAll(".ushouse").style("visibility", "visible");
+    }
+    });
+};
+    
     
 function uspresFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/federal")
     .await(drawcountymap);
-    .await(setData);
 }; 
 function ushouseFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/us_representative")
     .await(drawushousemap);
-    .await(setData);
 };
 function ussenateFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/federal")
     .await(drawcountymap);
-    .await(setData);
 };
 function mogovFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
     .await(drawcountymap);
-    .await(setData);
 };
 function moltgovFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
     .await(drawcountymap);
-    .await(setData);
 };
 function mososFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
     .await(drawcountymap);
-    .await(setData);
 };
 function motreFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
     .await(drawcountymap);
-    .await(setData);
 };
 function moagFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
     .await(drawcountymap);
-    .await(setData);
 };
 function mohouseFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_house")
     .await(drawmohousemap);
-    .await(setData);
 };
 /**
 function mosenateFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_senate")
     .await(drawmosenatemap);
-    .await(setData);
 };**/
 function ball1Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
     .await(drawcountymap);
-    .await(setData);
 };
 function ball2Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
     .await(drawcountymap);
-    .await(setData);
 };
 function ball3Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
     .await(drawcountymap);
-    .await(setData);
 };
 function ball4Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
     .await(drawcountymap);
-    .await(setData);
 };
 function ball6Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
     .await(drawcountymap);
-    .await(setData);
 };
 function ballaFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
     .await(drawcountymap);
-    .await(setData);
 };
 
 
@@ -374,19 +423,6 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
 
   message2 += "<br><b>(Precincts reporting: " +(~~percent) +"%)</b></ul>";
 
-// polyfill:
-// if (!Object.keys) Object.keys = function(o) {
-//   if (o !== Object(o))
-//     throw new TypeError('Object.keys called on a non-object');
-//   var k=[],p;
-//   for (p in o) if (Object.prototype.hasOwnProperty.call(o,p)) k.push(p);
-//   return k;
-// }
-  // Object.keys(mapData[currView]['District 44'].candidates).length
-
-
-//  this line simply applies the "message" to go in the infobox - jquery is "x.html(varname)"
-
   infoBox.html(message2);}
 
   }else  if (currView === "ushouse"){ 
@@ -439,7 +475,7 @@ bulletgroup =['<i class="fa fa-square yesvote"></i>','<i class="fa fa-square nov
 update = {
 
 
-   audit: function (data){
+   uspres: function (data){
       for (var fips in data.county_results) {
         var fipsInfo = data.county_results[fips],
                   el = d3.select('path#fips'+fips);
@@ -647,215 +683,129 @@ mosenate: function (data){
 
 function drawcountymap(){
     d3.json("data/mo_topo_county.json", function(collection) {
+    
+    var mapCounty =  mapGroup.append("g")
+        .attr("class", "group county");
+    var counties = topojson.feature(mo_county, mo_county.objects.mo_county_slice);
+    
+    mapCounty.append("path")
+        .datum(counties)
+        .attr("d", path);
+
+    mapCounty.selectAll(".county")
+        .data(topojson.feature(mo_county, mo_county.objects.mo_county_slice).features)
+    .enter().append("path")
+        .attr('id', function(d){return 'fips' + d.properties.COUNTYFP})
+        .attr("class", function(d) { return "county "; })
+        .attr("d", path)
+        .on("mouseover",infoBoxUpdates[currView])
+        .on("mouseout",infoBoxUpdates.clear);
+    mapCounty.append("path")
+        .datum(topojson.mesh(mo_county, mo_county.objects.mo_county_slice, function(a, b) { return a !== b}))
+        .attr("d", path)
+        .attr("class", "county-edges");
+    $(".my-map svg").fadeIn();
+    update[currView](mapData[currView]);
+    infoBoxUpdates[currView];
     };
-};
+)};
 
 function drawmohousemap(){
     d3.json("data/mo_topo_house.json", function(collection) {
+    var mapHouse =  mapGroup.append("g")
+        .attr("class", "group mohouse");
+        
+    var house = topojson.feature(mo_house, mo_house.objects.mo_house);
+
+    mapHouse.append("path")
+        .datum(house)
+        .attr("d", path);
+
+    mapHouse.selectAll(".mohouse")
+        .data(topojson.feature(mo_house, mo_house.objects.mo_house).features)
+        .enter().append("path")
+        .attr('id', function(d){return 'MHDistrict_' + d.properties.DISTRICT})
+        .attr("class", function(d) { return "mohouse" })
+        .attr("d", path)
+        .on("mouseover",infoBoxUpdates[currView])
+        .on("mouseout",infoBoxUpdates.clear);
+
+    mapHouse.append("path")
+        .datum(topojson.mesh(mo_house, mo_house.objects.mo_house, function(a, b) { return a !== b; }))
+        .attr("d", path)
+        .attr("class", "mohouse-edges");
+    $(".my-map svg").fadeIn();
+    update[currView](mapData[currView]);
+    infoBoxUpdates[currView];
     };
-};
+)};
 
 function drawushousemap(){
     d3.json("data/mo_topo_uscongress.json", function(collection) {
+    
+    var mapSenate =  mapGroup.append("g")
+        .attr("class", "group mosenate");
+
+    var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
+
+
+    mapSenate.append("path")
+        .datum(senate)
+        .attr("d", path);
+
+    mapSenate.selectAll(".mosenate")
+        .data(topojson.feature(mo_senate, mo_senate.objects.mo_senate).features)
+        .enter().append("path")
+    // strips out the "state senate" from the ID to match the data feed
+        .attr('id', function(d){var x = d.properties.NAMELSAD; var x = x.replace('State Senate ', ''); return 'MS'+x.replace(/ /,'_');})
+        .attr("class", function(d) { return "mosenate"})
+        .attr("d", path)
+        .on("mouseover",infoBoxUpdates[currView])
+        .on("mouseout",infoBoxUpdates.clear);
+
+    mapSenate.append("path")
+        .datum(topojson.mesh(mo_senate, mo_senate.objects.mo_senate, function(a, b) { return a !== b; }))
+        .attr("d", path)
+        .attr("class", "mosenate-edges");
     };
+    $(".my-map svg").fadeIn();
+    update[currView](mapData[currView]);
+    infoBoxUpdates[currView];
+
 };
     
 function drawmosenatemap(){
     d3.json("data/mo_topo_senate.json", function(collection) {
-    };
-};
     
-    
-    
-    
-var timeBox = $('#time');
-var lu = " <i>Last Updated: " + test.last_updated + "</i>";
-// console.log(lu)
-timeBox.html(lu);
-  // time.html(lu)
-    
-mapData = {
-    uspres: test.races['US Races']['Presidential'],
-    ushouse: test.races['US Races']['US House'],
-    ussenate: test.races['US Races']['US Senate'],
-    mogov: test.races['State Races']['Governor'],
-    moltgov: test.races['State Races']['Lt. Governor'],
-    mosos: test.races['State Races']['Secretary of State'],
-    motre: test.races['State Races']['Treasurer'],
-    moag: test.races['State Races']['Attorney General'],
-    mohouse: test.races['State Races']['MO House'],
-    mosenate: test.races['State Races']['MO Senate'],
-    ball1: test.races['Ballot Issues']['Amendment 1'],
-    ball2: test.races['Ballot Issues']['Amendment 2'],
-    ball3: test.races['Ballot Issues']['Amendment 3'],
-    ball4: test.races['Ballot Issues']['Amendment 4'],
-    ball6: test.races['Ballot Issues']['Amendment 6'],
-    balla: test.races['Ballot Issues']['Proposition A'],
-};
+    var mapSenate =  mapGroup.append("g")
+        .attr("class", "group mosenate");
+
+    var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
 
 
-drawMap: function (error, mo_county, mo_house, us_congress, mo_senate) {
-    
-// STATEWIDE
+    mapSenate.append("path")
+        .datum(senate)
+        .attr("d", path);
 
-var mapCounty =  mapGroup.append("g")
-    .attr("class", "group county");
-var counties = topojson.feature(mo_county, mo_county.objects.mo_county_slice);
-mapCounty.append("path")
-    .datum(counties)
-    .attr("d", path);
-mapCounty.selectAll(".county")
-    .data(topojson.feature(mo_county, mo_county.objects.mo_county_slice).features)
-  .enter().append("path")
-    .attr('id', function(d){return 'fips' + d.properties.COUNTYFP})
-    .attr("class", function(d) { return "county "; })
-    .attr("d", path)
-    .on("mouseover",infoBoxUpdates[currView])
-    .on("mouseout",infoBoxUpdates.clear);
-mapCounty.append("path")
-    .datum(topojson.mesh(mo_county, mo_county.objects.mo_county_slice, function(a, b) { return a !== b}))
-    .attr("d", path)
-    .attr("class", "county-edges");
-
-
-
-
-// HOUSE DISTRICTS
-
-var mapHouse =  mapGroup.append("g")
-    .attr("class", "group mohouse");
-var house = topojson.feature(mo_house, mo_house.objects.mo_house);
-mapHouse.append("path")
-    .datum(house)
-    .attr("d", path);
-mapHouse.selectAll(".mohouse")
-    .data(topojson.feature(mo_house, mo_house.objects.mo_house).features)
-    .enter().append("path")
-    .attr('id', function(d){return 'MHDistrict_' + d.properties.DISTRICT})
-    .attr("class", function(d) { return "mohouse" })
-    .attr("d", path)
-    .on("mouseover",infoBoxUpdates[currView])
-    .on("mouseout",infoBoxUpdates.clear);
-mapHouse.append("path")
-    .datum(topojson.mesh(mo_house, mo_house.objects.mo_house, function(a, b) { return a !== b; }))
-    .attr("d", path)
-    .attr("class", "mohouse-edges");
-
-
-    
-//MO SENATE
-
-var mapSenate =  mapGroup.append("g")
-    .attr("class", "group mosenate");
-
-var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
-
-
-mapSenate.append("path")
-    .datum(senate)
-    .attr("d", path);
-
-mapSenate.selectAll(".mosenate")
-    .data(topojson.feature(mo_senate, namedFunctionmo_senate.objects.mo_senate).features)
-    .enter().append("path")
+    mapSenate.selectAll(".mosenate")
+        .data(topojson.feature(mo_senate, mo_senate.objects.mo_senate).features)
+        .enter().append("path")
     // strips out the "state senate" from the ID to match the data feed
-    .attr('id', function(d){var x = d.properties.NAMELSAD; var x = x.replace('State Senate ', ''); return 'MS'+x.replace(/ /,'_');})
-    .attr("class", function(d) { return "mosenate"})
-    .attr("d", path)
-    .on("mouseover",infoBoxUpdates[currView])
-    .on("mouseout",infoBoxUpdates.clear);
+        .attr('id', function(d){var x = d.properties.NAMELSAD; var x = x.replace('State Senate ', ''); return 'MS'+x.replace(/ /,'_');})
+        .attr("class", function(d) { return "mosenate"})
+        .attr("d", path)
+        .on("mouseover",infoBoxUpdates[currView])
+        .on("mouseout",infoBoxUpdates.clear);
 
-mapSenate.append("path")
-    .datum(topojson.mesh(mo_senate, mo_senate.objects.mo_senate, function(a, b) { return a !== b; }))
-    .attr("d", path)
-    .attr("class", "mosenate-edges");
-
-//US HOUSE
-var mapCongress =  mapGroup.append("g")
-    .attr("class", "group ushouse");
-
-
-var uscongress = topojson.feature(us_congress, us_congress.objects.mo_congress);
-
-
-mapCongress.append("path")
-    .datum(uscongress)
-    .attr("d", path);
-
-mapCongress.selectAll(".ushouse")
-    .data(topojson.feature(us_congress, us_congress.objects.mo_congress).features)
-    .enter().append("path")
-    .attr('id', function(d){ var x = d.properties.CD113FP; return 'USDistrict_' + x.replace(/0/,'');})
-    .attr("class", function(d) { return "ushouse"; })
-    .attr("d", path)
-    .on("mouseover",infoBoxUpdates[currView])
-    .on("mouseout",infoBoxUpdates.clear);
-
-mapCongress.append("path")
-    .datum(topojson.mesh(us_congress, us_congress.objects.mo_congress, function(a, b) { return a !== b; }))
-    .attr("d", path)
-    .attr("class", "ushouse-edges");
-
-
- $(".loading").hide();
-  $(".my-map svg").fadeIn();
-update[currView](mapData[currView]);
+    mapSenate.append("path")
+        .datum(topojson.mesh(mo_senate, mo_senate.objects.mo_senate, function(a, b) { return a !== b; }))
+        .attr("d", path)
+        .attr("class", "mosenate-edges");
+         $(".loading").hide();
+  
+    $(".my-map svg").fadeIn();
+    update[currView](mapData[currView]);
     infoBoxUpdates[currView];
-
-} //close theMap.drawMap
-
-
-
-
-
-
-
-
-
-} //close theMap
-
-})(jQuery);
-
-
-// Buttons! change view-state to active on click 
-//########################################
-// ##### also triggers the UPDATE ######
-//########################################
-
-function setNav () {
-
-
-    $(".btn.view-state").on("click", function() {
-        currView = $(this).attr("val");
-    infoBoxUpdates[currView];
-
-    $(".btn.view-state").removeClass("active");
-    $(this).addClass("active");
-
-
-    if (currView === "audit" || currView === "ca2" || currView === "ca3" || currView === "ca6"|| currView === "ca10") {
-    update[currView](mapData[currView]);
-    d3.selectAll(".mohouse, .mosenate, .ushouse")
-    .style("visibility", "hidden");
-    d3.selectAll(".county").style("visibility", "visible");
-    } else if (currView === "mohouse") {
-    update[currView](mapData[currView]);
-    d3.selectAll(".ushouse, .mosenate, .county")
-    .style("visibility", "hidden");
-    d3.selectAll(".mohouse").style("visibility", "visible");
-    } else if (currView === "mosenate") {
-    update[currView](mapData[currView]);
-    d3.selectAll(".mohouse, .ushouse, .county")
-    .style("visibility", "hidden");
-    d3.selectAll(".mosenate").style("visibility", "visible");
-    } else if (currView === "ushouse") {
-    update[currView](mapData[currView]);
-    d3.selectAll(".mohouse, .mosenate, .county")
-    .style("visibility", "hidden");
-    d3.selectAll(".ushouse").style("visibility", "visible");
-
-}
-});
-
-};
+    };
+)};
 
