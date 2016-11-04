@@ -742,101 +742,12 @@ function drawmohousemap(){
 
 function drawushousemap(){
     d3.json("data/mo_topo_uscongress.json", function(collection) {
-<<<<<<< HEAD
     
     var mapSenate =  mapGroup.append("g")
         .attr("class", "group mosenate");
 
     var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
 
-=======
-    };
-};
-    
-function drawmosenatemap(){
-    d3.json("data/mo_topo_senate.json", function(collection) {
-    };
-};
-      
-    
-var timeBox = $('#time');
-var lu = " <i>Last Updated: " + test.last_updated + "</i>";
-// console.log(lu)
-timeBox.html(lu);
-  // time.html(lu)
-    
-mapData = {
-    uspres: test.races['US Races']['Presidential'],
-    ushouse: test.races['US Races']['US House'],
-    ussenate: test.races['US Races']['US Senate'],
-    mogov: test.races['State Races']['Governor'],
-    moltgov: test.races['State Races']['Lt. Governor'],
-    mosos: test.races['State Races']['Secretary of State'],
-    motre: test.races['State Races']['Treasurer'],
-    moag: test.races['State Races']['Attorney General'],
-    mohouse: test.races['State Races']['MO House'],
-    mosenate: test.races['State Races']['MO Senate'],
-    ball1: test.races['Ballot Issues']['Amendment 1'],
-    ball2: test.races['Ballot Issues']['Amendment 2'],
-    ball3: test.races['Ballot Issues']['Amendment 3'],
-    ball4: test.races['Ballot Issues']['Amendment 4'],
-    ball6: test.races['Ballot Issues']['Amendment 6'],
-    balla: test.races['Ballot Issues']['Proposition A'],
-};
-
-
-drawMap: function (error, mo_county, mo_house, us_congress, mo_senate) {
-    
-// STATEWIDE
-
-var mapCounty =  mapGroup.append("g")
-    .attr("class", "group county");
-var counties = topojson.feature(mo_county, mo_county.objects.mo_county_slice);
-mapCounty.append("path")
-    .datum(counties)
-    .attr("d", path);
-mapCounty.selectAll(".county")
-    .data(topojson.feature(mo_county, mo_county.objects.mo_county_slice).features)
-  .enter().append("path")
-    .attr('id', function(d){return 'fips' + d.properties.COUNTYFP})
-    .attr("class", function(d) { return "county "; })
-    .attr("d", path)
-    .on("mouseover",infoBoxUpdates[currView])
-    .on("mouseout",infoBoxUpdates.clear);
-mapCounty.append("path")
-    .datum(topojson.mesh(mo_county, mo_county.objects.mo_county_slice, function(a, b) { return a !== b}))
-    .attr("d", path)
-    .attr("class", "county-edges");
-
-
-// HOUSE DISTRICTS
-
-var mapHouse =  mapGroup.append("g")
-    .attr("class", "group mohouse");
-var house = topojson.feature(mo_house, mo_house.objects.mo_house);
-mapHouse.append("path")
-    .datum(house)
-    .attr("d", path);
-mapHouse.selectAll(".mohouse")
-    .data(topojson.feature(mo_house, mo_house.objects.mo_house).features)
-    .enter().append("path")
-    .attr('id', function(d){return 'MHDistrict_' + d.properties.DISTRICT})
-    .attr("class", function(d) { return "mohouse" })
-    .attr("d", path)
-    .on("mouseover",infoBoxUpdates[currView])
-    .on("mouseout",infoBoxUpdates.clear);
-mapHouse.append("path")
-    .datum(topojson.mesh(mo_house, mo_house.objects.mo_house, function(a, b) { return a !== b; }))
-    .attr("d", path)
-    .attr("class", "mohouse-edges");
-  
-//MO SENATE
-
-var mapSenate =  mapGroup.append("g")
-    .attr("class", "group mosenate");
-
-var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
->>>>>>> origin/master
 
     mapSenate.append("path")
         .datum(senate)
@@ -861,7 +772,6 @@ var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
     update[currView](mapData[currView]);
     infoBoxUpdates[currView];
 
-<<<<<<< HEAD
 };
     
 function drawmosenatemap(){
@@ -869,23 +779,6 @@ function drawmosenatemap(){
     
     var mapSenate =  mapGroup.append("g")
         .attr("class", "group mosenate");
-=======
-} //close theMap.drawMap
-
-
-} //close theMap
-
-})(jQuery);
-
-
-// Buttons! change view-state to active on click 
-//########################################
-// ##### also triggers the UPDATE ######
-//########################################
-
-function setNav () {
-
->>>>>>> origin/master
 
     var senate = topojson.feature(mo_senate, mo_senate.objects.mo_senate);
 
