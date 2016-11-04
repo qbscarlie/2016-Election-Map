@@ -31,22 +31,22 @@ var path = d3.geo.path()
 var join = {}; 
 var test = {};
 
-$(".us-nav-uspres").click(uspresFunction);
-$(".us-nav-ushouse").click(ushouseFunction);
-$(".us-nav-ussenate").click(ussenateFunction);
-$(".state-nav-mogov").click(mogovFunction);
-$(".state-nav-moltgov").click(moltgovFunction);
-$(".state-nav-mosos").click(mososFunction);
-$(".state-nav-motre").click(motreFunction);
-$(".state-nav-moag").click(moagFunction);
-$(".state-nav-mohouse").click(mohouseFunction);
-$(".state-nav-mosenate").click(mosenateFunction);
-$(".ball-nav-ball1").click(ball1Function);
-$(".ball-nav-ball2").click(ball2Function);
-$(".ball-nav-ball3").click(ball3Function);
-$(".ball-nav-ball4").click(ball4Function);
-$(".ball-nav-ball6").click(ball6Function);
-$(".ball-nav-balla").click(ballaFunction);
+$(".uspres").click(uspresFunction);
+$(".ushouse").click(ushouseFunction);
+$(".ussenate").click(ussenateFunction);
+$(".mogov").click(mogovFunction);
+$(".moltgov").click(moltgovFunction);
+$(".mosos").click(mososFunction);
+$(".motre").click(motreFunction);
+$(".moag").click(moagFunction);
+$(".mohouse").click(mohouseFunction);
+$(".mosenate").click(mosenateFunction);
+$(".ball1").click(ball1Function);
+$(".ball2").click(ball2Function);
+$(".ball3").click(ball3Function);
+$(".ball4").click(ball4Function);
+$(".ball6").click(ball6Function);
+$(".balla").click(ballaFunction);
 
 
 
@@ -80,98 +80,98 @@ function loading() {
 function uspresFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/federal")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 }; 
 function ushouseFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/us_representative")
-    .await(theMap.drawMap);
+    .await(drawushousemap);
     .await(setData);
 };
 function ussenateFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/federal")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function mogovFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function moltgovFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function mososFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function motreFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function moagFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_of_missouri")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function mohouseFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_house")
-    .await(theMap.drawMap);
+    .await(drawmohousemap);
     .await(setData);
 };
 /**
 function mosenateFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/state_senate")
-    .await(theMap.drawMap);
+    .await(drawmosenatemap);
     .await(setData);
 };**/
 function ball1Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function ball2Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function ball3Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function ball4Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function ball6Function(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 function ballaFunction(){
     queue()
     .defer(d3.json, "https://elections.accessmo.org/ballot_issues")
-    .await(theMap.drawMap);
+    .await(drawcountymap);
     .await(setData);
 };
 
@@ -645,30 +645,34 @@ mosenate: function (data){
   }; // end update
 
 
-// var for 
-mapData = {};
-function setData (error, feed_data) {
-theMap.init();
-  
+function drawcountymap(){
+    d3.json("data/mo_topo_county.json", function(collection) {
+    };
+};
 
-test = feed_data;
+function drawmohousemap(){
+    d3.json("data/mo_topo_house.json", function(collection) {
+    };
+};
 
+function drawushousemap(){
+    d3.json("data/mo_topo_uscongress.json", function(collection) {
+    };
+};
+    
+function drawmosenatemap(){
+    d3.json("data/mo_topo_senate.json", function(collection) {
+    };
+};
+    
+    
+    
+    
 var timeBox = $('#time');
 var lu = " <i>Last Updated: " + test.last_updated + "</i>";
 // console.log(lu)
 timeBox.html(lu);
   // time.html(lu)
-
-//mapData = {
-  //mosenate: test.races['State Senate'],
-  //mohouse: test.races['State House'],
-  //ushouse: test.races['US Representative'],
-  //ca2: test.races['Ballot Issues']['Constitutional Amendment 2'],
-  //ca3: test.races['Ballot Issues']['Constitutional Amendment 3'],
-  //ca6: test.races['Ballot Issues']['Constitutional Amendment 6'],
-  //ca10: test.races['Ballot Issues']['Constitutional Amendment 10'],
-  //audit: test.races['State of Missouri']['State Auditor'],
-//};
     
 mapData = {
     uspres: test.races['US Races']['Presidential'],
@@ -689,39 +693,17 @@ mapData = {
     balla: test.races['Ballot Issues']['Proposition A'],
 };
 
-}; //close setData
 
-
-
-
-var theMap = {
-
-  init: function () {
-
-    queue ()
-
-          .defer(d3.json, "data/mo_topo_county.json")
-          .defer(d3.json, "data/mo_topo_house.json")
-          .defer(d3.json, "data/mo_topo_uscongress.json")
-          .defer(d3.json, "data/mo_topo_senate.json")
-.await(theMap.drawMap);
-
-}
 drawMap: function (error, mo_county, mo_house, us_congress, mo_senate) {
     
 // STATEWIDE
 
 var mapCounty =  mapGroup.append("g")
     .attr("class", "group county");
-
-
 var counties = topojson.feature(mo_county, mo_county.objects.mo_county_slice);
-
-
 mapCounty.append("path")
     .datum(counties)
     .attr("d", path);
-
 mapCounty.selectAll(".county")
     .data(topojson.feature(mo_county, mo_county.objects.mo_county_slice).features)
   .enter().append("path")
@@ -730,9 +712,6 @@ mapCounty.selectAll(".county")
     .attr("d", path)
     .on("mouseover",infoBoxUpdates[currView])
     .on("mouseout",infoBoxUpdates.clear);
-
-
-
 mapCounty.append("path")
     .datum(topojson.mesh(mo_county, mo_county.objects.mo_county_slice, function(a, b) { return a !== b}))
     .attr("d", path)
@@ -745,13 +724,10 @@ mapCounty.append("path")
 
 var mapHouse =  mapGroup.append("g")
     .attr("class", "group mohouse");
-
 var house = topojson.feature(mo_house, mo_house.objects.mo_house);
-
 mapHouse.append("path")
     .datum(house)
     .attr("d", path);
-
 mapHouse.selectAll(".mohouse")
     .data(topojson.feature(mo_house, mo_house.objects.mo_house).features)
     .enter().append("path")
@@ -760,14 +736,13 @@ mapHouse.selectAll(".mohouse")
     .attr("d", path)
     .on("mouseover",infoBoxUpdates[currView])
     .on("mouseout",infoBoxUpdates.clear);
-
 mapHouse.append("path")
     .datum(topojson.mesh(mo_house, mo_house.objects.mo_house, function(a, b) { return a !== b; }))
     .attr("d", path)
     .attr("class", "mohouse-edges");
 
 
-
+    
 //MO SENATE
 
 var mapSenate =  mapGroup.append("g")
@@ -795,7 +770,7 @@ mapSenate.append("path")
     .attr("d", path)
     .attr("class", "mosenate-edges");
 
-//US CONGRESS
+//US HOUSE
 var mapCongress =  mapGroup.append("g")
     .attr("class", "group ushouse");
 
