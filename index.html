@@ -1,59 +1,42 @@
-<!doctype html>
-
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-
     <title>2016 Missouri Elections</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <!-- Latest compiled and minified Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css"/>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.3.0/d3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
+    <script type="text/json" src="permissions.json"></script>
 </head>
+    <body>
 
-<body class="">
-
-    <div id="main-wrapper" class="">
-        <div id="main-content" class="container">
-            <header class="row">
-                <div class="social-links col-md-12"></div>
-                <div class="col-md-12">
-
-                    <h1>Missouri General Election Results</h1>
-                    <div class="byline"><a href="https://twitter.com/CarlieProcell" target="blank">Carlie Procell</a> and
-                    <a href="http://twitter.com/daniellevitt32" target="blank">Daniel Levitt</a>
-                    </div>
-                </div>
-            </header>
-            <br>
-            
-        <section class="row">
-            <div class='col-md-12'>
-                <nav class="navbr navbar-default">
-                <div class="navbar-header">
-                    <a class="navbar-brand"></a>
-                </div>
-                <ul class="nav navbar-nav">
-                <li><div class="dropdown">
+        <div class="container">
+            <div class="row">
+                <nav></nav>
+            </div>
+            <div class="row">
+                <div id="infobox">
+                <!--    <div class='col-md-12'>
+                        <nav class='navbr navbar-default'>
+                        <ul class="nav navbar-nav">
+                            <li><div class="dropdown">
                     <button class="btn tn-primary dropdown-toggle" type="button" data-toggle="dropdown" val='US'>U.S. Races <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                <li><a class="view-state-activate view-state-uspres">President</a></li>
-                <li><a class="view-state-activate view-state-ushouse">U.S. Senate</a></li>
-                <li><a class="view-state-activate view-state-ussenate">U.S. House</a></li>
-                    
+                <li><a href="#president" id="president_tab">President</a></li>
+                <li><a href="#senator" id="senate_tab">Senate race</a></li>
+                <li><a class="view-state-activate view-state-ussenate">U.S. House</a></li>               
                 </ul>
                 </div></li>
                 <li><div class="dropdown">
                     <button class="btn tn-primary dropdown-toggle" type="button" data-toggle="dropdown" val='MO'>State Races <span class="caret"></span></button>
                 <ul class="dropdown-menu">
 
-                <!--CLASS FOR PADDING AROUND RACES IN DROPDOWN-->
-                <!--button type="button" class="btn btn-sm btn-default view-state" val='mogov'</button>-->
+
                     <li><a class="view-state-activate view-state-mogov">Governor</a></li>
                     <li><a class="view-state-activate view-state-mosos">Secretary of State</a></li>
                     <li><a class="view-state-activate view-state-moag">Attorney General</a></li>
@@ -75,45 +58,64 @@
                 </ul>
                 </div></li></ul>
                 </nav>
-            </div>
-        <!-- class "my-map" is what the d3 points at -->
-        <div id="mapholder">
-            <div class="col-md-12 my-map">
-                <img class='loading' src='img/loading.gif'>
-            </div>
-            <div id = "infobox">
-                
-            </div>
-            <div id = "time"> 
+            </div>-->
+
+                    
+                    
+                    
+                    
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active"><a href="#president" role="tab" data-toggle="tab" id="president_tab">U.S. President</a></li>
+                      <li role="presentation"><a href="#senator" role="tab" data-toggle="tab" id="senate_tab">U.S. Senate</a></li>
+                      <!--<li role="presentation"><a href="#ushouse" role="tab" data-toggle="tab" id="ushouse_tab">Representative race</a></li>-->
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="president">
+                            <div class="col-xs-12 col-sm-8 map" id="pres_map"></div>
+                            <div class="col-xs-6 col-sm-4 infobox" id="infobox">
+                                <h3><b>County: <span id="county_name"></span></b></h3>
+                            <h4>Leading candidate: <span id="pres_candidate_name"></span></h4>
+                            <h4>Leading party: <span id="pres_party"></span></h4>
+                            <h4>Votes for this candidate: <span id="pres_votes"></span></h4>
+                            <h4>Reporting precincts: <span id="pres_precinct"></span></h4>
+                            </div></div>
+                        <div role="tabpanel" class="tab-pane" id="senator">
+                            <div class="col-xs-12 col-sm-8 map" id="sen_map"></div>
+                            <div class="col-xs-6 col-sm-4 infobox" id="infobox">
+                            <h3><b>County: <span id="county_name"></span></b></h3>
+                            <h4>Leading candidate: <span id="sen_candidate_name"></span></h4>
+                            <h4>Leading party: <span id="sen_party"></span></h4>
+                            <h4>Votes for this candidate: <span id="sen_votes"></span></h4>
+                            <h4>Reporting precincts: <span id="sen_precinct"></span></h4>
+                            </div></div>
+                        <!--<div role="tabpanel" class="tab-pane" id="ushouse">
+                            <h4>District: <span id="ushouse_name"></span></h4>
+                            <h4>Leading candidate: <span id="ushouse_candidate_name"></span></h4>
+                            <h4>Leading party: <span id="ushouse_party"></span></h4>
+                            <h4>Votes for this candidate: <span id="ushouse_votes"></span></h4>
+                            <h4>Reporting precincts: <span id="ushouse_precinct"></span></h4>
+                            <div class="col-md-12 map" id="ushouse_map"></div>
+                        </div>-->
+                    </div>
+
                 </div>
-        </div>
-            </section>
+            </div>
 
-            <footer>
+            <div class="row">
+                <footer>
+                    <div id="time">
+                    <h5>Info updated: <span id="updated"></span></h5>
+                            </div>
                 <div id="source-line">Source: <a href="http://www.sos.mo.gov/elections/s_default" target="blank">MISSOURI SECRETARY OF STATE</a></div>
-            </footer>
+                </footer> 
+            </div>
 
         </div>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="http://d3js.org/topojson.v1.min.js"></script>
-    <script src="http://d3js.org/queue.v1.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- App script -->
+        <script type="text/javascript" src="js/map.js"></script>
 
-    <!-- Latest compiled and minified Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-633409-10', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-</body>
+    </body>
 </html>
