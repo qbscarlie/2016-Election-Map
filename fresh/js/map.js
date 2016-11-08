@@ -12,7 +12,7 @@ var testData = {
     }
 };
 
-//function drawcountymap(){
+//draw county map
     d3.json('data/mo_topo_county.json', function(moTopoCounty){
 //  console.log(moTopoCounty);
 //  console.log(div);
@@ -51,7 +51,7 @@ var testData = {
     });
     
 });
-//};
+
 
 function determineWinner(county){
     _.max(county.candidates, function(candidate){ return candidate.votes; });
