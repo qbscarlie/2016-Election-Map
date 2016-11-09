@@ -16,7 +16,9 @@ $(function() {
         // Get the date when it was last updated
         // Variable "updated" is a date object, you can start reading here on how to use it:
             // http://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
-        var updated = new Date(data.last_updated);
+        //var updated = new Date(data.last_updated);
+        var updated = new Date(0);
+        updated.setUTCSeconds(data.last_updated);
         $("#updated").text(updated);
 
         // Let's re-factor the structure of data we got to make it work snappier with D3:
