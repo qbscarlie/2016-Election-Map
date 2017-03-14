@@ -10,7 +10,8 @@ $(function() {
     var width = height = $("#pres_map").width();
 
     // Let's get the data first
-    $.getJSON("https://elections.accessmo.org/federal", function(data){
+    //$.getJSON("https://elections.accessmo.org/federal", function(data){
+    $.getJSON("data/federalelection.json", function(data){
         // And only after we get it, can we draw a map with it.
 
         // Get the date when it was last updated
@@ -77,7 +78,7 @@ $(function() {
                 if ( num == max_vote_count ){
                     winner_id = i
                 }
-                
+
             });
             return winner_id
         };
@@ -110,13 +111,13 @@ $(function() {
                     // Clear all containers when user cursor leaves map
                     $("#infobox").find("span").text("");
                 });
-            
+
             path = d3.geoPath();
-            
+
             path.projection(d3.geoAlbersUsa());
-            
+
             geo = topojson.feature(moTopoCounty, moTopoCounty.objects.mo_county_slice);
-            
+
             path.projection().fitSize([width, height], geo);
 
             svg.append('g')
@@ -128,17 +129,17 @@ $(function() {
                 .attr("d", path)
                 .style("fill", "rgba(0,0,0,0.2)")
                 .style("stroke", "#fff");
-         
+
                 svg.selectAll("path")
                     .on('mouseover', function(d){
 
                         $("#county_name").text( d.properties.NAME );
 
                         if (race == "president"){
-                            
+
                             var county_president_data = clear_data.president[d.properties.COUNTYFP];
                             var president_winner = president_candidates[ getWinnerID(county_president_data) ];
-                            
+
                             $("#pres_candidate_name").text( president_winner.name );
                             $("#pres_party").text( president_winner.party );
                             $("#pres_votes").text( president_winner.votes );
@@ -187,7 +188,7 @@ $(function() {
                                     return "#cfcfd1" //gray
                                 }
 
-                                
+
                             }
 
                         } else { //that is if race is for the senate
@@ -228,7 +229,7 @@ $(function() {
 
             createMap("#pres_map", "president", moTopoCounty);
             createMap("#sen_map", "senate", moTopoCounty);
-            
+
         });
         /**d3.json('data/mo_topo_uscongress', function(moTopoUSHouse){
             createUSHouseMap("#ushouse_map", "ushouse", moTopoUSHouse);
